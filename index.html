@@ -12,6 +12,16 @@
   <button id="sendButton">Send Hello to Sheets</button>
 
   <script>
+    // -------------------------------------------------------------------------
+// SERVICE WORKER REGISTRATION (The final piece of the PWA checklist)
+// -------------------------------------------------------------------------
+if ('serviceWorker' in navigator) {
+    // This tells the browser to look for our background file 'sw.js'
+    navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registered successfully!', reg))
+        .catch(err => console.log('Service Worker registration failed:', err));
+}
+// -------------------------------------------------------------------------
     // 1. Identify the button in the code so we can watch for clicks
     const btn = document.getElementById('sendButton');
 
