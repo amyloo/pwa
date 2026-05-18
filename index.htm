@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello World PWA</title>
+  <style>
+    body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f0f0f0; }
+    button { padding: 20px 40px; font-size: 1.2rem; cursor: pointer; background: #4285f4; color: white; border: none; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <button id="sendButton">Send Hello to Sheets</button>
+
+  <script>
+    // 1. Identify the button in the code so we can watch for clicks
+    const btn = document.getElementById('sendButton');
+
+    // 2. Replace the text below with your actual Google Apps Script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyOZlvWgDjG4_aSK6Cg_WT1t3VJCK0wTmvlGusY2EjPz-ZqyDI8ukzFRPYK9BiJ69-ujw/exec';
+
+    // 3. This 'Event Listener' waits for you to click the button
+    btn.addEventListener('click', () => {
+      // Change the button text so the user knows something is happening
+      btn.innerText = "Sending...";
+
+      // 4. This is the 'JSON' object. It is a structured way to
+      // package our data so the Google Script knows exactly where to look.
+      const dataToSend = {
+        "message": "Hello World"
+      };
+
+      // 5. 'fetch' is the command that actually sends the data across the internet
+      fetch(scriptURL, {
+        method: 'POST', // We are 'posting' a new entry
+        mode: 'no-cors', // This allows us to talk to Google without security errors
+        cache: 'no-cache',
+        headers: { 'Content-Type': 'application/json' },
+        // We turn our JSON object into a string of text to send it through the 'pipe'
+        body: JSON.stringify(dataToSend)
+      })
+      .then(response => {
+        // If the fetch is successful, we update the button
+        btn.innerText = "Success! Check your sheet.";
+        btn.style.background = "#34a853";
+      })
+      .catch(error => {
+        // If something goes wrong, we show the error
+        console.error('Error!', error.message);
+        btn.innerText = "Error. Try again.";
+      });
+    });
+  </script>
+</body>
+</html>
