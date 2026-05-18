@@ -1,0 +1,15 @@
+{
+  "short_name": "HelloSheet",
+  "name": "Hello World Google Sheet Connector",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4285f4"
+}
